@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="jquery-1.11.3.min.js"></script>
+<script src="xlsx.full.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//根据页面table，生成worksheet数据
+		var ws = XLSX.utils.table_to_sheet(document.getElementById('tableau'));
+		console.log(ws);
+		
+		//根据页面table，生成worksheet
+		var html_str = document.getElementById('tableau').outerHTML;
+		var ws1 = XLSX.read(html_str, {type:'string'});
+		console.log(ws1);
+		
+		//根据数组生成worksheet数据
+		var ws2 = XLSX.utils.json_to_sheet([
+		      { A:"S", B:"h", C:"e", D:"e", E:"t", F:"J", G:"S" },
+		      { A: 1,  B: 2,  C: 3,  D: 4,  E: 5,  F: 6,  G: 7  },
+		      { A: 2,  B: 3,  C: 4,  D: 5,  E: 6,  F: 7,  G: 8  }
+		    ], {header:["A","B","C","D","E","F","G"], skipHeader:true});
+		console.log(ws2);
+		//向指定的sheet追加数据（ws2）
+		var ws3 = XLSX.utils.sheet_add_json(ws2, [
+		      { A: 4, B: 5, C: 6, D: 7, E: 8, F: 9, G: 0 }
+		    ], {skipHeader: true, origin: -1});
+		console.log(ws2);
+		console.log(ws3);
+		
+		//将worksheet添加进workbook
+		var wb = XLSX.utils.book_new();
+	    XLSX.utils.book_append_sheet(wb, ws, "wsName");
+	    XLSX.utils.book_append_sheet(wb, ws3, "ws3Name");
+		console.log(wb);
+		
+		
+		var s2ab = function (s) { // 字符串转字符流
+			var buf = new ArrayBuffer(s.length)
+			var view = new Uint8Array(buf)
+			for (var i = 0; i !== s.length; ++i) {
+				view[i] = s.charCodeAt(i) & 0xFF
+			}
+			return buf
+		}
+		// 创建二进制对象写入转换好的字节流
+		let tmpDown =  new Blob([s2ab(XLSX.write(wb,{bookType: 'xlsx', bookSST: false, type: 'binary'} ))], {type: ''}) 
+		let a = document.createElement('a');
+		// 利用URL.createObjectURL()方法为a元素生成blob URL
+		a.href = URL.createObjectURL(tmpDown)  // 创建对象超链接
+		a.download = '我的表格.xlsx';
+		a.click();
+	});
+
+</script>
+</head>
+<body>
+	  <table id="tableau">
+    	<thead>
+    		<tr>
+    			<th>This</th>
+    			<th>is</th>
+    			<th>a</th>
+    			<th>Test</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr>
+    			<td>hello</td>
+    			<td>world</td>
+    			<td>你</td>
+    			<td>好</td>
+    		</tr>
+    		<tr>
+    			<td>1</td>
+    			<td>2</td>
+    			<td>3</td>
+    			<td>4</td>
+    		</tr>
+    	</tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.mapper.TUserMapper">
+
+	<resultMap type="com.ssm.model.Tuser" id="Tuser"></resultMap>
+	
+    <select id="findByUsers" parameterType="string" resultMap="Tuser">
+        select u.id,u.name,u.age,u.birthday,u.update_time from user u
+    </select>
+</mapper>

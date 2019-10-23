@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context.xsd   
+        http://www.springframework.org/schema/mvc  
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<context:component-scan base-package="com.ssm" use-default-filters="false">
+		<context:include-filter type="annotation" 
+			expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- Bean解析器,级别高于默认解析器,根据返回的名称去匹配定义好的视图bean对象 -->
+    <bean id="beanNameViewResolver"
+          class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0">
+    </bean>
+	<!-- 内部资源视图解析器，优先级应该最低，order属性值要比其他的视图解析器的值要大，能够保证所有的映射不被遗忘。 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"  p:order="2">
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.InternalResourceView</value>
+		</property>
+		<!-- 设置前缀，即视图所在的路径 -->
+		<property name="prefix" value="/pages/" />
+		<!-- 设置后缀，即视图的扩展名 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 自定义映射，需要<mvc:annotation-driven>配置支持，但是不能有多个，只能有一个 -->
+	<bean class="com.ssm.block.mvc.rhm.CustomerHandlerMapping">
+		<!-- 必须要设置order为0，否则会优先使用默认的映射器。否则的话，虽然当前映射也会注册，但是请求时在默认映射结果匹配后已经返回，不会判断当前映射结果 -->
+	    <property name="order" value="0"/>
+	</bean>
+	
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<bean id="jsonmessageConverterMvc"
+				class="com.ssm.block.mvc.message.CustomJsonHttpMessageConverter">
+<!-- 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> -->
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+				<property name="objectMapper">
+					<bean class="com.ssm.block.mvc.message.MyObjectMapper">  
+                        <property name="dateFormat">  
+                            <bean class="com.ssm.block.mvc.message.MyDateFormat"></bean>  
+                        </property>  
+                    </bean> 
+				</property>
+			</bean>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+</beans>  
