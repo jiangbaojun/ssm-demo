@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.ssm.block.spring.beans.MyUser;
 
 /**
- * 测试后置处理器
+ * 测试
  */
 public class MainTest {
 	public static void main(String[] args) {

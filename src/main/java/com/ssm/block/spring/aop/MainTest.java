@@ -6,7 +6,7 @@ import com.ssm.block.spring.aop.beans.MyUser;
 import com.ssm.block.spring.aop.beans.bean1.MyUser2;
 
 /**
- * 测试propertySource
+ * 测试
  */
 public class MainTest {
 	public static void main(String[] args) {
