@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- setting配置，详见https://mybatis.org/mybatis-3/zh/configuration.html#properties -->
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+	</settings>
+
+	<!-- 配置别名 -->
+<!-- 	<typeAliases> -->
+<!-- 		<package name="com.ssm.block.mybatis.example2.entity"/> -->
+<!-- 	</typeAliases> -->
+	<typeAliases>
+		<typeAlias alias="User" type="com.ssm.block.mybatis.example2.entity.User" />
+	</typeAliases>
+	
+<!-- 	类型处理器 -->
+<!-- 	<typeHandlers> -->
+<!-- 	  <package name="com.ssm.block.mybatis.example2.handler"/> -->
+<!-- 	</typeHandlers> -->
+	<typeHandlers>
+		<typeHandler handler="com.ssm.block.mybatis.example2.handler.ExampleTypeHandler"/>
+	</typeHandlers>
+	
+<!-- 	对象工厂 -->
+	<objectFactory type="com.ssm.block.mybatis.example2.factory.ExampleObjectFactory">
+	  <property name="someProperty" value="100"/>
+	</objectFactory>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://127.0.0.1:3306/blog" />
+				<property name="username" value="root" />
+				<property name="password" value="123456" />
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- 指定mapper文件 -->
+	<mappers>
+		<mapper resource="com/ssm/block/mybatis/example2/mapper.xml" />
+	</mappers>
+</configuration>

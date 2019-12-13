@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.block.mybatis.example2.dao.UserDao">
+  <select id="selectUser" resultType="User">
+    select * from Blog where id = #{id}
+  </select>
+  <select id="selectAllUser" resultType="com.ssm.block.mybatis.example2.entity.User">
+    select * from Blog 
+  </select>
+  <select id="selectYoungUser" resultType="com.ssm.block.mybatis.example2.entity.User">
+    select * from Blog where createTime &gt; #{date}
+  </select>
+  
+  <select id="selectUserByPhone" resultType="com.ssm.block.mybatis.example2.entity.User">
+    select * from Blog where phones like "%"#{phones}"%"
+  </select>
+  
+<!--   注意：当只有一个参数（org.apache.ibatis.session.defaults.DefaultSqlSession.wrapCollection）
+		数组，参数名为array
+		list集合，参数名为list
+		其他集合，参数名为collection
+ -->
+  <select id="selectUserByPhones" resultType="com.ssm.block.mybatis.example2.entity.User">
+    select * from Blog where phones like CONCAT(CONCAT('%', #{array,jdbcType=VARCHAR}), '%')
+<!--     select * from Blog where phones  in -->
+<!--         <foreach collection="array" item="phone" index="index" -->
+<!--             open="(" close=")" separator=","> -->
+<!--             #{phone} -->
+<!--         </foreach> -->
+
+  </select>
+  
+</mapper>

@@ -7,5 +7,6 @@ public class question {
 	 * 2、移除一个bean
 	 * 3、 Profile的使用
 	 * 4、@Value 和 SpEL
+	 * 5、import测试
 	 */
 }
