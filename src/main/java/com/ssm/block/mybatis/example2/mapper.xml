@@ -16,7 +16,93 @@
   <select id="selectUserByPhone" resultType="com.ssm.block.mybatis.example2.entity.User">
     select * from Blog where phones like "%"#{phones}"%"
   </select>
+<!--   <select id="selectUserByPhone" resultType="com.ssm.block.mybatis.example2.entity.User"> -->
+<!-- 	  <bind name="phones" value="'%' + _parameter + '%'" /> -->
+<!-- 	   select * from Blog where phones like #{phones} -->
+<!--   </select> -->
   
+  
+<!--   关联查询 -->
+<!-- 	如果设置autoMapping为true，将自动映射字段名称。不建议所有resultmap都设置true，以免造成映射混乱，除非每组表和bean的字段名称一其他的都不相同 -->
+	<resultMap id="UserResult" type="com.ssm.block.mybatis.example2.entity.User" autoMapping="true">
+	  <id property="id" column="id"/>
+	  <association property="org" resultMap="OrgResult"/>
+	  <collection property="roles" javaType="list" resultMap="RoleResult" />
+	</resultMap>
+	<resultMap id="OrgResult" type="com.ssm.block.mybatis.example2.entity.Organization">
+		<id property="id" column="orgid"/>
+		<result property="name" column="orgName"/>
+		<result property="date" column="orgDate"/>
+	</resultMap>
+	<resultMap id="RoleResult" type="com.ssm.block.mybatis.example2.entity.Role">
+		<id property="id" column="roleid"/>
+		<result property="roleName" column="roleName"/>
+	</resultMap>
+	
+<!-- 	以下UserResult的声明，和上面的是等效的 -->
+<!-- 
+	<resultMap id="UserResult" type="com.ssm.block.mybatis.example2.entity.User" autoMapping="true">
+	  <id property="id" column="id"/>
+	  <association property="org" javaType="com.ssm.block.mybatis.example2.entity.Organization">
+	  	<id property="id" column="orgid"/>
+		<result property="name" column="orgName"/>
+		<result property="date" column="orgDate"/>
+	  </association>
+	  <collection property="roles" javaType="list" ofType="com.ssm.block.mybatis.example2.entity.Role">
+	  	<id property="id" column="roleid"/>
+		<result property="roleName" column="roleName"/>
+	  </collection>
+	</resultMap>
+-->
+	<select id="getUserAllInfo" resultMap="UserResult">
+	  select 
+	  	u.*, 
+	  	o.id orgId, o.name orgName, o.date orgDate, 
+	  	r.roleName, ur.roleid 
+	  from 
+	  	user u,
+	  	role r,
+	  	user_role ur,
+	  	organization o 
+	  where u.orgId=o.id and u.id=ur.userid and ur.roleid=r.id
+<!-- 	  等效sql -->
+<!-- 
+		select 
+		  	u.*, 
+		  	o.id orgId, o.name orgName, o.date orgDate, 
+		  	r.roleName, ur.roleid 
+		from 
+		  	user u
+			left join organization o on u.orgId=o.id
+			left join user_role ur on u.id=ur.userid
+		  	left join role r on ur.roleid=r.id
+ -->
+	</select>
+
+
+
+<!-- 	嵌套select查询,本例测试角色list的嵌套。此种方式容易差生N+1问题，效率较低。建议用上面的getUserAllInfo做关联查询实现 -->
+		<resultMap id="UserResult2" type="com.ssm.block.mybatis.example2.entity.User" autoMapping="true">
+<!-- 			column属性指的是数据库中的列名，作为子查询的参数。
+				本例中，主查询getUserAllInfo2，子查询selectRolesForUser。
+				如果column="id"，表示将主查询结果的id字段作为子查询的参数，此时子查询的where条件ur.userid=#{id}
+				如果有多参数需要传递给子查询，可以column="{userid=id}"，此时子查询的where条件ur.userid=#{userid}
+ -->
+		  <collection property="roles" javaType="list" column="{userid=id}" ofType="com.ssm.block.mybatis.example2.entity.Role" select="selectRolesForUser"/>
+		</resultMap>
+		<select id="getUserAllInfo2" resultMap="UserResult2">
+		  SELECT * FROM USER	
+		</select>
+		<select id="selectRolesForUser" resultType="com.ssm.block.mybatis.example2.entity.Role">
+		  SELECT 
+		  	* 
+		  FROM 
+		  	ROLE r left join user_role ur on r.id=ur.roleid 
+		  where 
+		  	ur.userid=#{userid} 
+		</select>
+
+
 <!--   注意：当只有一个参数（org.apache.ibatis.session.defaults.DefaultSqlSession.wrapCollection）
 		数组，参数名为array
 		list集合，参数名为list
@@ -29,7 +115,23 @@
 <!--             open="(" close=")" separator=","> -->
 <!--             #{phone} -->
 <!--         </foreach> -->
-
   </select>
+  
+  
+  <insert id="addUser" parameterType="com.ssm.block.mybatis.example2.entity.User">
+  	insert into user1
+  		(id,name,content,createTime,phones,orgId)
+  	values
+  		(#{id},#{name},#{content},#{createTime},#{phones},#{orgId})
+  </insert>
+  
+<!--   插入多条 -->
+  <insert id="addUsers">
+  	insert into user1 (id,name,content,createTime,phones,orgId) values 
+	<foreach item="user" collection="list" separator=",">
+  		(#{user.id},#{user.name},#{user.content},#{user.createTime},#{user.phones},#{user.orgId})
+  	</foreach>
+  </insert>
+  
   
 </mapper>

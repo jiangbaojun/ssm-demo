@@ -6,6 +6,7 @@
 	<!-- setting配置，详见https://mybatis.org/mybatis-3/zh/configuration.html#properties -->
 	<settings>
 		<setting name="cacheEnabled" value="true" />
+		<setting name="logImpl" value="SLF4J"/>
 	</settings>
 
 	<!-- 配置别名 -->
@@ -28,9 +29,26 @@
 	<objectFactory type="com.ssm.block.mybatis.example2.factory.ExampleObjectFactory">
 	  <property name="someProperty" value="100"/>
 	</objectFactory>
+	
+<!-- 	插件 -->
+	<plugins>
+	  <plugin interceptor="com.ssm.block.mybatis.example2.plugins.ExamplePlugin">
+	    <property name="someProperty" value="100"/>
+	  </plugin>
+	</plugins>
 
 	<environments default="development">
 		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://127.0.0.1:3306/blog_test" />
+				<property name="username" value="root" />
+				<property name="password" value="123456" />
+			</dataSource>
+		</environment>
+		<environment id="production">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver" />
@@ -45,4 +63,13 @@
 	<mappers>
 		<mapper resource="com/ssm/block/mybatis/example2/mapper.xml" />
 	</mappers>
+<!-- 	<mappers> -->
+<!-- 	  <mapper url="file://D:/myProject/eclipseWS/ssm-demo/src/main/java/com/ssm/block/mybatis/example2/mapper.xml"/> -->
+<!-- 	</mappers> -->
+<!-- 	<mappers> -->
+<!-- 	  <mapper class="com.ssm.block.mybatis.example2.dao.UserDao"/> -->
+<!-- 	</mappers> -->
+<!-- 	<mappers> -->
+<!-- 	  <package name="com.ssm.block.mybatis.example2.dao"/> -->
+<!-- 	</mappers> -->
 </configuration>
