@@ -1,4 +1,4 @@
-package com.ssm.block.mvc.message;
+package com.ssm.block.mvc.message.bak;
 
 import java.sql.Time;
 import java.sql.Timestamp;

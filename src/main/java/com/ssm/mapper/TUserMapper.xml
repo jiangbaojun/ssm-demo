@@ -5,6 +5,6 @@
 	<resultMap type="com.ssm.model.Tuser" id="Tuser"></resultMap>
 	
     <select id="findByUsers" parameterType="string" resultMap="Tuser">
-        select u.id,u.name,u.age,u.birthday,u.update_time from user u
+        select u.id,u.name,u.age,u.birthday,u.update_time,u.time from user u
     </select>
 </mapper>

@@ -32,7 +32,8 @@ public class TUserController extends BaseController {
     @RequestMapping("/all")
     @ResponseBody
     public List<Tuser> test1(HttpServletRequest request){
-        return tUserService.findByUsersAll();
+    	List<Tuser> list = tUserService.findByUsersAll();
+    	return list;
     }
 
     /**

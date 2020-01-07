@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedJdbcTypes;
+import org.apache.ibatis.type.MappedTypes;
 
-//@MappedTypes({String[].class})
-//@MappedJdbcTypes({JdbcType.VARCHAR})
+@MappedTypes({String[].class})
+@MappedJdbcTypes({JdbcType.VARCHAR})
 public class ExampleTypeHandler extends BaseTypeHandler<String[]> {
 
     /* 
@@ -33,8 +35,7 @@ public class ExampleTypeHandler extends BaseTypeHandler<String[]> {
         return str.split(",");
     }
 
-    /*47      * @see org.apache.ibatis.type.BaseTypeHandler#getNullableResult(java.sql.CallableStatement, int)
-     */
+    
     @Override
     public String[] getNullableResult(CallableStatement cs, int columnIndex)
             throws SQLException {

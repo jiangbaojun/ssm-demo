@@ -54,8 +54,8 @@
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="true">
 			<bean id="jsonmessageConverterMvc"
-				class="com.ssm.block.mvc.message.CustomJsonHttpMessageConverter">
-<!-- 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> -->
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+<!-- 				class="com.ssm.block.mvc.message.CustomJsonHttpMessageConverter"> -->
 				<property name="supportedMediaTypes">
 					<list>
 						<value>application/json;charset=UTF-8</value>

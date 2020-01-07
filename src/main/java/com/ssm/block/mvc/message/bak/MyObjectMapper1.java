@@ -1,17 +1,17 @@
-package com.ssm.block.mvc.message;
+package com.ssm.block.mvc.message.bak;
 
 import java.text.DateFormat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * 暂未使用自定义ObjectMapper，难度较大
- * jackson的ObjectMapper的扩展性还是很不错的，没有特殊必要，不用自定义
+ * 自定义ObjectMap的日期格式化，此种方式叫繁琐，建议使用objectmapper的serializer实现
  * @author		姜宝俊
  */
-public class MyObjectMapper extends ObjectMapper {
+public class MyObjectMapper1 extends ObjectMapper {
 	private static final long serialVersionUID = 1L;
 
+	
 	@Override
 	public ObjectMapper setDateFormat(DateFormat dateFormat) {
 		super.setDateFormat(new MyDateFormat(dateFormat));
