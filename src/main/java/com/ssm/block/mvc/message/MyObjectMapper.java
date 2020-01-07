@@ -12,9 +12,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
+/**
+ * 自定义ObjectMapper
+ */
 public class MyObjectMapper extends ObjectMapper {
 
-    public MyObjectMapper() {
+	private static final long serialVersionUID = 1L;
+	
+	public MyObjectMapper() {
 
         SimpleModule se = new SimpleModule();
         //自定类型序列化
