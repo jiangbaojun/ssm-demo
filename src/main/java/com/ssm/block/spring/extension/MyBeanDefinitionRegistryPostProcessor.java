@@ -11,6 +11,8 @@ import com.ssm.block.spring.beans.Person;
 
 /**
  * 手动动态注册beandefinition
+ * 相当于没有beandefinition的情况下，添加一个beandefinition。类似于在xml添加一个<bean/>
+ * 比BeanFactoryPostProcessor先执行
  */
 @Component
 public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {

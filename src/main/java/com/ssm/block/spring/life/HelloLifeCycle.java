@@ -14,7 +14,7 @@ public class HelloLifeCycle implements SmartLifecycle {
     private volatile boolean running = false;
 
     public HelloLifeCycle() {
-        System.out.println("构造方法!!!");
+        System.out.println("lifycycle构造方法!!!");
     }
 
    
