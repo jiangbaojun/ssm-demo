@@ -26,7 +26,7 @@ public class MainTest {
 //			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream, "production");
 			SqlSession session = sqlSessionFactory.openSession(true);
-			
+
 			System.out.println("----------------------------------命名空间查找（sqlid）-----------------------------------------------------------");
 //			Object obj = session.selectOne("com.ssm.block.mybatis.example2.dao.UserDao.selectUser","1");
 //			System.out.println(obj);
