@@ -2,11 +2,13 @@ package com.ssm.block.mybatis.example2;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -15,10 +17,16 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.ssm.block.mybatis.example2.dao.UserDao;
 import com.ssm.block.mybatis.example2.entity.User;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.sql.DataSource;
 
 public class MainTest {
 
 	public static void main(String[] args) throws ParseException {
+
+
 		InputStream inputStream;
 		try {
 			String resource = "com/ssm/block/mybatis/example2/config.xml";
