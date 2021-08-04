@@ -15,7 +15,7 @@ public interface UserDao {
 
 	/**
 	 * 此次查询的数据量很大
-	 * 直接查询，很慢很慢
+	 * 直接查询，很慢很慢。可能导致内存溢出
 	 */
 	List<User> selectAllUser(Map<String,Object> params);
 
@@ -34,6 +34,9 @@ public interface UserDao {
 	 */
 	Cursor<User> selectAllUserCursor(Map<String,Object> params);
 
+	/**
+	 * 通过RowBounds限制查询条数
+	 */
 	List<User> selectUserBounds(Map<String,Object> params, RowBounds rowBounds);
 
 }
