@@ -7,7 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>ssm-demo</name>
   <url>http://maven.apache.org</url>
-  
+
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- spring -->
@@ -54,7 +54,7 @@
 		    <version>1.8.9</version>
 		</dependency>
 		<!-- jackson -->
-		<dependency> 
+		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-core</artifactId>
 		    <version>${jackson.version}</version>
@@ -65,7 +65,7 @@
 		    <version>${jackson.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId> 
+		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-annotations</artifactId>
 		    <version>${jackson.version}</version>
 		</dependency>
@@ -100,7 +100,7 @@
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
-		    <version>5.1.36</version>
+		    <version>8.0.13</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.github.pagehelper</groupId>
@@ -220,8 +220,14 @@
 		    <artifactId>slf4j-api</artifactId>
 		    <version>1.7.25</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
         <finalName>ssm-demo</finalName>
         <resources>

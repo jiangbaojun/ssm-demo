@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.block.mybatis.example3.UserDao">
+  <select id="selectUser" resultType="com.ssm.block.mybatis.example3.entity.User">
+    select * from tb2 where id = #{id}
+  </select>
+
+  <select id="selectUserBounds" resultType="com.ssm.block.mybatis.example3.entity.User">
+    select id, name, age, phone from tb2 where id &gt; ${minId}
+  </select>
+
+  <!-- tb3表有100w数据，直接查询，内存溢出 -->
+  <select id="selectAllUser" resultType="com.ssm.block.mybatis.example3.entity.User">
+    select id, name, age, phone from tb3 where id &gt; ${minId}
+  </select>
+
+  <!-- fetchSize属性也可以在接口处用注解 -->
+  <select id="selectAllUserFetch" fetchSize="1000" resultType="com.ssm.block.mybatis.example3.entity.User">
+    select id, name, age, phone from tb3 where id &gt; ${minId}
+  </select>
+
+
+  <select id="selectAllUserCursor" resultType="com.ssm.block.mybatis.example3.entity.User">
+    select id, name, age, phone from tb3 where id &gt; ${minId}
+  </select>
+
+</mapper>

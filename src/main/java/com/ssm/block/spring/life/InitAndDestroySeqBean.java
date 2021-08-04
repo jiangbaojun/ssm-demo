@@ -19,7 +19,7 @@ public class InitAndDestroySeqBean implements InitializingBean,DisposableBean {
     }
     
     @PostConstruct
-    public void postConstruct() {  
+    public void postConstruct() {
        System.out.println("2执行InitAndDestroySeqBean: postConstruct");  
     }  
     

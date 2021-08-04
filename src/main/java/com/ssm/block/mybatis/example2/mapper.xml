@@ -7,12 +7,12 @@
     select * from Blog where id = #{id}
   </select>
   <select id="selectAllUser" resultType="com.ssm.block.mybatis.example2.entity.User">
-    select * from Blog 
+    select * from Blog
   </select>
   <select id="selectYoungUser" resultType="com.ssm.block.mybatis.example2.entity.User">
     select * from Blog where createTime &gt; #{date}
   </select>
-  
+
   <select id="selectUserByPhone" resultType="com.ssm.block.mybatis.example2.entity.User">
     select * from Blog where phones like "%"#{phones}"%"
   </select>
@@ -20,8 +20,8 @@
 <!-- 	  <bind name="phones" value="'%' + _parameter + '%'" /> -->
 <!-- 	   select * from Blog where phones like #{phones} -->
 <!--   </select> -->
-  
-  
+
+
 <!--   关联查询 -->
 <!-- 	如果设置autoMapping为true，将自动映射字段名称。不建议所有resultmap都设置true，以免造成映射混乱，除非每组表和bean的字段名称一其他的都不相同 -->
 	<resultMap id="UserResult" type="com.ssm.block.mybatis.example2.entity.User" autoMapping="true">
@@ -38,9 +38,9 @@
 		<id property="id" column="roleid"/>
 		<result property="roleName" column="roleName"/>
 	</resultMap>
-	
+
 <!-- 	以下UserResult的声明，和上面的是等效的 -->
-<!-- 
+<!--
 	<resultMap id="UserResult" type="com.ssm.block.mybatis.example2.entity.User" autoMapping="true">
 	  <id property="id" column="id"/>
 	  <association property="org" javaType="com.ssm.block.mybatis.example2.entity.Organization">
@@ -55,23 +55,23 @@
 	</resultMap>
 -->
 	<select id="getUserAllInfo" resultMap="UserResult">
-	  select 
-	  	u.*, 
-	  	o.id orgId, o.name orgName, o.date orgDate, 
-	  	r.roleName, ur.roleid 
-	  from 
+	  select
+	  	u.*,
+	  	o.id orgId, o.name orgName, o.date orgDate,
+	  	r.roleName, ur.roleid
+	  from
 	  	user u,
 	  	role r,
 	  	user_role ur,
-	  	organization o 
+	  	organization o
 	  where u.orgId=o.id and u.id=ur.userid and ur.roleid=r.id
 <!-- 	  等效sql -->
-<!-- 
-		select 
-		  	u.*, 
-		  	o.id orgId, o.name orgName, o.date orgDate, 
-		  	r.roleName, ur.roleid 
-		from 
+<!--
+		select
+		  	u.*,
+		  	o.id orgId, o.name orgName, o.date orgDate,
+		  	r.roleName, ur.roleid
+		from
 		  	user u
 			left join organization o on u.orgId=o.id
 			left join user_role ur on u.id=ur.userid
@@ -91,15 +91,15 @@
 		  <collection property="roles" javaType="list" column="{userid=id}" ofType="com.ssm.block.mybatis.example2.entity.Role" select="selectRolesForUser"/>
 		</resultMap>
 		<select id="getUserAllInfo2" resultMap="UserResult2">
-		  SELECT * FROM USER	
+		  SELECT * FROM USER
 		</select>
 		<select id="selectRolesForUser" resultType="com.ssm.block.mybatis.example2.entity.Role">
-		  SELECT 
-		  	* 
-		  FROM 
-		  	ROLE r left join user_role ur on r.id=ur.roleid 
-		  where 
-		  	ur.userid=#{userid} 
+		  SELECT
+		  	*
+		  FROM
+		  	ROLE r left join user_role ur on r.id=ur.roleid
+		  where
+		  	ur.userid=#{userid}
 		</select>
 
 
@@ -116,22 +116,22 @@
 <!--             #{phone} -->
 <!--         </foreach> -->
   </select>
-  
-  
+
+
   <insert id="addUser" parameterType="com.ssm.block.mybatis.example2.entity.User">
-  	insert into user1
+  	insert into user2
   		(id,name,content,createTime,phones,orgId)
   	values
   		(#{id},#{name},#{content},#{createTime},#{phones},#{orgId})
   </insert>
-  
+
 <!--   插入多条 -->
   <insert id="addUsers">
-  	insert into user1 (id,name,content,createTime,phones,orgId) values 
+  	insert into user1 (id,name,content,createTime,phones,orgId) values
 	<foreach item="user" collection="list" separator=",">
   		(#{user.id},#{user.name},#{user.content},#{user.createTime},#{user.phones},#{user.orgId})
   	</foreach>
   </insert>
-  
-  
+
+
 </mapper>
