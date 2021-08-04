@@ -5,6 +5,7 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +28,10 @@ public class InitAndDestroySeqBean implements InitializingBean,DisposableBean {
     public void afterPropertiesSet() throws Exception {
         System.out.println("3执行InitAndDestroySeqBean: afterPropertiesSet"); 
     }
-    
+
+    /**
+     * 在xml中配置init-method
+     */
     public void initMethod() {
         System.out.println("4执行InitAndDestroySeqBean: init-method");
     }
@@ -47,7 +51,10 @@ public class InitAndDestroySeqBean implements InitializingBean,DisposableBean {
     }
     
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("com/chj/spring/bean.xml");
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("com/chj/spring/bean.xml");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.scan("com.ssm.block.spring.life");
+        context.refresh();
         context.close();
     }
 }

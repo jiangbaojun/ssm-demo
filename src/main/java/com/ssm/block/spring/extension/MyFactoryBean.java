@@ -7,6 +7,7 @@ import com.ssm.block.spring.beans.MyUser;
 
 /**
  * FactoryBean
+ * 可以实现将我们自己实例化的bean，加入spring进行管理
  * 创建两个实例，MyFactoryBean本身和getObject方法返回的实例对象
  */
 @Component

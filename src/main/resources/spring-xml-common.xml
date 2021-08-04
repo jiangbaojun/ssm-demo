@@ -11,8 +11,8 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context.xsd">
   
-   <context:component-scan base-package="com.ssm.block.spring"></context:component-scan>	
-	
+   <context:component-scan base-package="com.ssm.block.spring"></context:component-scan>
+
 	<bean id="t1Services" class="com.ssm.block.spring.beans.T1Services"></bean>
 	<bean id="initAndDestroySeqBean" class="com.ssm.block.spring.life.InitAndDestroySeqBean" init-method="initMethod"></bean>
 	

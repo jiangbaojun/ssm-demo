@@ -17,6 +17,7 @@ public class Test {
 		list.add("1");
 		list.add("3");
 		System.out.println(new Test().f3(list));
+
 	}
 
 	public List<String> f1(List<String> list) {

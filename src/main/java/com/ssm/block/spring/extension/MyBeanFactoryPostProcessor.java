@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * BeanFactory后置处理
+ * 相当于工程初始化完成，但是还没有实例化bean。此时已经解析生成了beandefinition，可以对beandefinition进行修改
  */
 @Component
 public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
