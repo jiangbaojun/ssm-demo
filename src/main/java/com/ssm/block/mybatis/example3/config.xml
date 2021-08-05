@@ -9,14 +9,23 @@
 <!--      <property name="maxCount" value="100"/>-->
 <!--    </plugin>-->
 <!--  </plugins>-->
-  <environments default="development">
-    <environment id="development">
+  <environments default="mysql_db">
+    <environment id="mysql_db">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
         <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/db1?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8"/>
         <property name="username" value="root"/>
         <property name="password" value="12345678"/>
+      </dataSource>
+    </environment>
+    <environment id="oracle_db">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@140.100.130.112:1521:orcl"/>
+        <property name="username" value="micro_vsta"/>
+        <property name="password" value="micro_vsta"/>
       </dataSource>
     </environment>
   </environments>

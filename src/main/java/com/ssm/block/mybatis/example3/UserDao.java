@@ -23,14 +23,14 @@ public interface UserDao {
 	 * 分批fetch获取，不用一次把数据都加载进内存
 	 * 要注意：
 	 * 1、方法返回值必须是void
-	 * 2、@Options指定每次抓取的数据量。也可以在xml中指定
+	 * 2、需要在xml-sql中指定fetchSize。fetchSize的值对查询速度影响很大，合理设置
 	 */
-//	@Options(fetchSize = 1000)
 	void selectAllUserFetch(Map<String,Object> params, MyResultHandler myResultHandler);
 
 	/**
 	 * 游标查询
 	 * 返回游标对象
+	 * 需要在xml-sql中指定fetchSize。fetchSize的值对查询速度影响很大，合理设置
 	 */
 	Cursor<User> selectAllUserCursor(Map<String,Object> params);
 

@@ -22,7 +22,7 @@ public class MainTest {
 		try {
 			String resource = "com/ssm/block/mybatis/example3/config.xml";
 			inputStream = Resources.getResourceAsStream(resource);
-			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream, "oracle_db");
 			SqlSession session = sqlSessionFactory.openSession();
 
 			UserDao userDao = session.getMapper(UserDao.class);
