@@ -1,17 +1,17 @@
 package com.ssm.block.spring.imports.config.select;
 
-import java.util.Map;
-import java.util.Set;
-
+import com.ssm.block.spring.imports.annotations.EnableTestFunction;
+import com.ssm.block.spring.imports.bean.TestSelect;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
 
-import com.ssm.block.spring.imports.annotations.EnableTestFunction;
-import com.ssm.block.spring.imports.bean.TestSelect;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * IOC容器启动时，通过ConfigurationClassPostProcessor（实现了BeanDefinitionRegistryPostProcessor），在postProcessBeanDefinitionRegistry中查找ImportSelector
  * 将selectImports方法返回的数组，注入IOC中
+ * 主要用于配置类（被@Configuration注解的类）的导入
  */
 public class TestImportSelector implements ImportSelector{
 

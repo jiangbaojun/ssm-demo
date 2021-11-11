@@ -18,12 +18,12 @@
 
   <!-- fetchSize属性也可以在接口处用注解 -->
   <select id="selectAllUserFetch" fetchSize="10000" resultType="com.ssm.block.mybatis.example3.entity.User">
-    select id, name, age, phone from tb2 where id &gt; ${minId}
+    select id, name, age, phone from tb1 where id &gt; ${minId}
   </select>
 
   <!-- fetchSize，通过实际测试，建议设置200以上 -->
   <select id="selectAllUserCursor" fetchSize="1000" resultType="com.ssm.block.mybatis.example3.entity.User">
-    select id, name, age, phone from tb2 where id &gt; ${minId}
+    select id, name, age, phone from tb1 where id &gt; ${minId}
   </select>
 
 </mapper>

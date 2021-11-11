@@ -1,15 +1,14 @@
 package com.ssm.block.spring.imports;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
-
 import com.ssm.block.spring.imports.annotations.EnableTestFunction;
 import com.ssm.block.spring.imports.bean.Test;
 import com.ssm.block.spring.imports.config.ConfigA;
 import com.ssm.block.spring.imports.config.ConfigB;
 import com.ssm.block.spring.imports.config.register.TestImportBeanDefinitionRegistrar;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * import测试

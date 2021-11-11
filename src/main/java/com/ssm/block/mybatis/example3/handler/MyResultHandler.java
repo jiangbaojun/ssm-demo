@@ -29,7 +29,11 @@ public class MyResultHandler implements ResultHandler<User> {
     //模拟一批批数据处理
     size++;
     if (size == BATCH_SIZE) {
+      System.out.println("handle:"+resultContext.getResultCount());
       handle();
+    }
+    if(resultContext.isStopped()){
+      System.out.println("stoped:"+resultContext.getResultCount());
     }
   }
 
