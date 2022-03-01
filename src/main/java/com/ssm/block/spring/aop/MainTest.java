@@ -1,5 +1,6 @@
 package com.ssm.block.spring.aop;
 
+import com.ssm.block.spring.aop.beans.bean2.Xiaohong;
 import com.ssm.block.spring.aop.beans.bean2.Xiaoming;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -33,8 +34,12 @@ public class MainTest {
 
 		Xiaoming xm = context.getBean(Xiaoming.class);
 //		xm.printAge();
-//		xm.printName();
+		xm.printName();
 		xm.printSex();
+
+		Xiaohong xh = context.getBean(Xiaohong.class);
+//		xh.printSex();
+
 	}
 }
 

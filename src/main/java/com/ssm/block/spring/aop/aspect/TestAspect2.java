@@ -15,7 +15,8 @@ public class TestAspect2 {
 
 
 	//@within，执行方法（join point）所在的类上有TargetTest注解，这个类可以是父类(看joint point是在父类还是子类)
-	@Pointcut("@within(com.ssm.block.spring.aop.annotation.TargetTest) && @annotation(com.ssm.block.spring.aop.annotation.MethodTest)")
+	@Pointcut("@within(com.ssm.block.spring.aop.annotation.TargetTest)")
+//	@Pointcut("@within(com.ssm.block.spring.aop.annotation.TargetTest) || @annotation(com.ssm.block.spring.aop.annotation.MethodTest)")
 
     //@target，调用执行方法（join point）的目标对象类上有TargetTest注解，这个类不可以是父类。
 //	@Pointcut("@target(com.ssm.block.spring.aop.annotation.TargetTest) && @annotation(com.ssm.block.spring.aop.annotation.MethodTest)")
@@ -28,9 +29,13 @@ public class TestAspect2 {
      * @param jp
      * @param methodTest
      */
-//    @Before(value = "pc()")
     @Before("pc() && @annotation(methodTest)")
     public void befor(JoinPoint jp, MethodTest methodTest) {
+    	System.out.println("i am TestAspect2 methodTest @before");
+    }
+
+    @Before(value = "pc()")
+    public void befor() {
     	System.out.println("i am TestAspect2 @before");
     }
 
