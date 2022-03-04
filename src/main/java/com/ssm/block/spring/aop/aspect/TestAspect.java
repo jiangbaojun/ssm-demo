@@ -14,7 +14,7 @@ public class TestAspect {
 //	@Pointcut("execution(* com.ssm.block.spring.aop.beans..*(..))")
 
 	//com.ssm.block.spring.aop.beans 包的所有方法(不包含子包)
-	@Pointcut("execution(* com.ssm.block.spring.aop.beans.*.*(..))")
+//	@Pointcut("execution(* com.ssm.block.spring.aop.beans.*.*(..))")
 
 	//com.ssm.block.spring.aop.beans 包的所有方法(不包含子包)
 //	@Pointcut("within(com.ssm.block.spring.aop.beans.*)")
@@ -22,8 +22,8 @@ public class TestAspect {
 	//com.ssm.block.spring.aop.beans 包及子包的所有方法
 //	@Pointcut("within(com.ssm.block.spring.aop.beans..*)")
 
-	//com.ssm.block.spring.aop.beans.MyUser 类的所有方法
-//	@Pointcut("within(com.ssm.block.spring.aop.beans.MyUser)")
+	//com.ssm.block.spring.aop.beans.MyUser 类的所有方法(子类和父类都不会被代理)
+	@Pointcut("within(com.ssm.block.spring.aop.beans.MyUser)")
 	public void pc() {
 	}
 

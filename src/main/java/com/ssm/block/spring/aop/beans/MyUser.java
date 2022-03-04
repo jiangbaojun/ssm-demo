@@ -3,12 +3,12 @@ package com.ssm.block.spring.aop.beans;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyUser {
+public class MyUser extends MyUserParent {
 
 	private String id;
 	private Integer age;
 	private String name;
-	
+
 	public String eat() throws Exception {
 		try {
 			System.out.println("user eat");
@@ -21,7 +21,7 @@ public class MyUser {
 		}
 		return "eated";
 	}
-	
+
 	public MyUser() {
 		super();
 	}
@@ -53,6 +53,6 @@ public class MyUser {
 	public String toString() {
 		return "MyUser [id=" + id + ", age=" + age + ", name=" + name + "]";
 	}
-	
-	
+
+
 }

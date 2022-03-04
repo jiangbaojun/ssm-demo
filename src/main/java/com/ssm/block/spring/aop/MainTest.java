@@ -22,11 +22,15 @@ public class MainTest {
 //		u.workStringAndDate(new Date(), "123");
 //		u.workString2AndDate("123",new Date(), "123");
 
-//		MyUser u1 = context.getBean(MyUser.class);
+//		MyUser u1 = context.getBean("myUser",MyUser.class);
+//		MyUser u1Son = context.getBean("myUserSon",MyUser.class);
+//		MyUserParent u1Parent = context.getBean("myUserParent",MyUserParent.class);
 //		MyUser2 u2 = context.getBean(MyUser2.class);
 //
 //		try {
 //			u1.eat();
+//			u1Son.eat();
+//			u1Parent.eat();
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
