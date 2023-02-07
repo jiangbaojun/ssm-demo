@@ -13,7 +13,7 @@
 		<!-- spring -->
 		<spring.version>5.3.19</spring.version>
 		<jackson.version>2.13.2</jackson.version>
-		<logback.version>1.2.3</logback.version>
+		<logback.version>1.2.9</logback.version>
 	</properties>
 	<dependencies>
 		<!-- 	spring -->
