@@ -4,13 +4,12 @@ import com.ssm.block.spring.aop.annotation.MethodTest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.stereotype.Component;
 
 /**
  * 常规用法
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class TestAspect2 {
 
 

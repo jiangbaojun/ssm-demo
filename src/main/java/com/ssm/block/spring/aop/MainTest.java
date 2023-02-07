@@ -40,6 +40,8 @@ public class MainTest {
 //		xm.printAge();
 		xm.printName();
 		xm.printSex();
+		xm.setName("hello xiaoming");
+		xm.printName();
 
 		Xiaohong xh = context.getBean(Xiaohong.class);
 //		xh.printSex();

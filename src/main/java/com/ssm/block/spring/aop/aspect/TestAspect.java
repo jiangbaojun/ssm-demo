@@ -2,16 +2,20 @@ package com.ssm.block.spring.aop.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
 
 /**
  * 常规用法
  */
-//@Aspect
-//@Component
+@Aspect
+@Component
 public class TestAspect {
 
 	//com.ssm.block.spring.aop.beans 包及子包的所有类所有方法
 //	@Pointcut("execution(* com.ssm.block.spring.aop.beans..*(..))")
+
+	//com.ssm.block.spring.aop.beans 包及子包的printSex方法
+//	@Pointcut("execution(* com.ssm.block.spring.aop.beans..printSex(..))")
 
 	//com.ssm.block.spring.aop.beans 包的所有方法(不包含子包)
 //	@Pointcut("execution(* com.ssm.block.spring.aop.beans.*.*(..))")
@@ -62,7 +66,7 @@ public class TestAspect {
     @Around(value = "pc()")
     public Object doBasicProfiling(ProceedingJoinPoint pjp) throws Throwable {
     	Object o1 = pjp.getThis();
-    	Object o2 = pjp.getSignature();
+    	Object o2 = pjp.getSignature().getName();
     	Object o3 = pjp.getTarget();
     	Object[] o4 = pjp.getArgs();
 

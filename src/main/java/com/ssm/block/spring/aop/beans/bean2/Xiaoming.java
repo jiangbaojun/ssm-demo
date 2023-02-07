@@ -17,4 +17,9 @@ public class Xiaoming extends People{
     public void printSex(){
         System.out.println("男");
     }
+
+    public String setName(String name) {
+        this.name = name;
+        return name;
+    }
 }
