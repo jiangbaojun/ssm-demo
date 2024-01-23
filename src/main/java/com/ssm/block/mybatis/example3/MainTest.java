@@ -44,8 +44,9 @@ public class MainTest {
 //			streamUsers.forEach((user -> {
 //				//System.out.println(user.getId());
 //			}));
+//			streamUsers.close();
 
-			//游标查询1，使用ResultHandler接收处理数据
+			//游标查询1，使用ResultHandler接收处理数据.jdbc连接上要添加useCursorFetch=true
 //			MyResultHandler myResultHandler = new MyResultHandler();
 //			userDao.selectAllUserCursor(params, myResultHandler);
 
@@ -54,7 +55,7 @@ public class MainTest {
 //			users.forEach((user -> {
 //				//System.out.println(user.getId());
 //			}));
-
+//			users.close();
 
 			System.out.println(System.currentTimeMillis()-start);
 

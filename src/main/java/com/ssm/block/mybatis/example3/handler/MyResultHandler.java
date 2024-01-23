@@ -30,7 +30,7 @@ public class MyResultHandler implements ResultHandler<User> {
     //模拟一批批数据处理
     int i = size.incrementAndGet();
     if (i%BATCH_SIZE==0) {
-      //System.out.println("handle:"+resultContext.getResultCount());
+      System.out.println("handle:"+resultContext.getResultCount());
       handle();
     }
     if(resultContext.isStopped()){
@@ -41,6 +41,9 @@ public class MyResultHandler implements ResultHandler<User> {
   private void handle() {
     try {
       // 在这里可以对你获取到的批量结果数据进行需要的业务处理
+      //TimeUnit.MILLISECONDS.sleep(100);
+    } catch (Exception e) {
+        e.printStackTrace();
     } finally {
       // 处理完每批数据后后将临时清空
       sets.clear();
