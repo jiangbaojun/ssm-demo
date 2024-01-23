@@ -32,16 +32,27 @@ public class MainTest {
 			Map<String,Object> params = new HashMap<>();
 			params.put("minId", "10");
 			//直接查数据
-//			userDao.selectAllUser(params);
+//			List<User> users = userDao.selectAllUser(params);
+//			System.out.println("users size:"+users.size());
 
-			//使用fetchSize做流式查询，分批抓取数据
+			//流式查询1，使用ResultHandler接收处理数据
 			MyResultHandler myResultHandler = new MyResultHandler();
-			userDao.selectAllUserFetch(params, myResultHandler);
+			userDao.selectAllUserStream(params, myResultHandler);
 
-			//游标查询，
-//			Cursor<User> users = userDao.selectAllUserCursor(params);
+			//流式查询2，使用Cursor接收处理数据
+//			Cursor<User> streamUsers = userDao.selectAllUserStream2(params);
+//			streamUsers.forEach((user -> {
+//				//System.out.println(user.getId());
+//			}));
+
+			//游标查询1，使用ResultHandler接收处理数据
+//			MyResultHandler myResultHandler = new MyResultHandler();
+//			userDao.selectAllUserCursor(params, myResultHandler);
+
+			//游标查询2，使用Cursor接收处理数据
+//			Cursor<User> users = userDao.selectAllUserCursor2(params);
 //			users.forEach((user -> {
-////				System.out.println(user);
+//				//System.out.println(user.getId());
 //			}));
 
 

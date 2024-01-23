@@ -1,13 +1,12 @@
 package com.ssm.block.spring.event;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.ssm.block.spring.event.entry.Event1;
+import com.ssm.block.spring.event.entry.Event2;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.ssm.block.spring.event.entry.Event1;
-import com.ssm.block.spring.event.entry.Event2;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 测试发布和监听事件
@@ -18,6 +17,7 @@ public class MainTest {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.register(AppConfig.class);
 		context.refresh();
+		context.start();
 
 		MyPublisher myPublisher = context.getBean("myPublisher", MyPublisher.class);
 		ApplicationEventPublisher applicationEventPublisher  = myPublisher.getApplicationEventPublisher();

@@ -6,6 +6,7 @@ import org.apache.ibatis.session.ResultHandler;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 批次抓取数据
@@ -13,7 +14,7 @@ import java.util.Set;
 public class MyResultHandler implements ResultHandler<User> {
   // 这是每批处理的大小
   private final static int BATCH_SIZE = 1000;
-  private int size;
+  private AtomicInteger size = new AtomicInteger(0);
   // 存储每批数据的临时容器
   private Set<User> sets = new HashSet<>();
 
@@ -27,9 +28,9 @@ public class MyResultHandler implements ResultHandler<User> {
     sets.add(user);
 
     //模拟一批批数据处理
-    size++;
-    if (size == BATCH_SIZE) {
-      System.out.println("handle:"+resultContext.getResultCount());
+    int i = size.incrementAndGet();
+    if (i%BATCH_SIZE==0) {
+      //System.out.println("handle:"+resultContext.getResultCount());
       handle();
     }
     if(resultContext.isStopped()){
@@ -42,7 +43,6 @@ public class MyResultHandler implements ResultHandler<User> {
       // 在这里可以对你获取到的批量结果数据进行需要的业务处理
     } finally {
       // 处理完每批数据后后将临时清空
-      size = 0;
       sets.clear();
     }
   }

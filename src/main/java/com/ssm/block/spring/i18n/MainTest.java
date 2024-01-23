@@ -1,8 +1,8 @@
 package com.ssm.block.spring.i18n;
 
-import java.util.Locale;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.Locale;
 
 /**
  * 测试国际化i18n

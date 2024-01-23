@@ -20,19 +20,34 @@ public interface UserDao {
 	List<User> selectAllUser(Map<String,Object> params);
 
 	/**
-	 * 分批fetch获取，不用一次把数据都加载进内存
+	 * 流式查询，使用MyResultHandler。不用一次把数据都加载进内存
 	 * 要注意：
 	 * 1、方法返回值必须是void
-	 * 2、需要在xml-sql中指定fetchSize。fetchSize的值对查询速度影响很大，合理设置
+	 * 2、需要在xml-sql中指定 fetchSize="-2147483648" resultSetType="FORWARD_ONLY"
+	 * fetchSize是int最小值
 	 */
-	void selectAllUserFetch(Map<String,Object> params, MyResultHandler myResultHandler);
+	void selectAllUserStream(Map<String,Object> params, MyResultHandler myResultHandler);
 
 	/**
-	 * 游标查询
-	 * 返回游标对象
-	 * 需要在xml-sql中指定fetchSize。fetchSize的值对查询速度影响很大，合理设置
+	 * 流式查询，使用cursor接收返回值
+	 *  需要在xml-sql中指定 fetchSize="-2147483648" resultSetType="FORWARD_ONLY"
+	 * 	fetchSize是int最小值
 	 */
-	Cursor<User> selectAllUserCursor(Map<String,Object> params);
+	Cursor<User> selectAllUserStream2(Map<String,Object> params);
+
+	/**
+	 * 游标查询，使用MyResultHandler
+	 * 需要在xml-sql中指定 fetchSize="100" resultSetType="FORWARD_ONLY"
+	 * fetchSize是每次取数据的条数，根据业务合理设置。和流式查询的区别，就是fetchSize的设置
+	 */
+	void selectAllUserCursor(Map<String,Object> params, MyResultHandler myResultHandler);
+
+	/**
+	 * 游标查询。返回游标对象
+	 * 需要在xml-sql中指定 fetchSize="100" resultSetType="FORWARD_ONLY"
+	 * fetchSize是每次取数据的条数，根据业务合理设置。和流式查询的区别，就是fetchSize的设置
+	 */
+	Cursor<User> selectAllUserCursor2(Map<String,Object> params);
 
 	/**
 	 * 通过RowBounds限制查询条数
