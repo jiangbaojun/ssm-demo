@@ -11,7 +11,7 @@
     select id, name, age, phone from tb2 where id &gt; ${minId}
   </select>
 
-  <!-- tb3表有100w数据，直接查询，内存溢出 -->
+  <!-- 表有100w数据，直接查询，内存溢出 -->
   <select id="selectAllUser" resultType="com.ssm.block.mybatis.example3.entity.User">
     select id, name, age, phone from tb1 where id &gt; ${minId}
   </select>
